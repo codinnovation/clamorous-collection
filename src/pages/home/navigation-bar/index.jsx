@@ -3,6 +3,7 @@ import styles from "../../../styles/home/navigation-bar.module.css";
 import Link from "next/link";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import MenuIcon from "@mui/icons-material/Menu";
 
 function NavigationBar() {
   return (
@@ -22,6 +23,10 @@ function NavigationBar() {
             <Link href="/">Contact</Link>
           </div>
 
+          <div className={styles.menuBurger}>
+            <MenuIcon className={styles.icon} />
+          </div>
+
           <div className={styles.cartContainer}>
             <div className={styles.cart}>
               <FavoriteIcon className={styles.icon} />
@@ -30,7 +35,7 @@ function NavigationBar() {
 
             <div className={styles.cart}>
               <ShoppingCartIcon className={styles.icon} />
-			  <div className={styles.itemCount}>9</div>
+              <div className={styles.itemCount}>9</div>
             </div>
           </div>
         </div>

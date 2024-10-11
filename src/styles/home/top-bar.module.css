@@ -19,14 +19,14 @@
   align-items: center;
 }
 
-.firstContent .line{
-	width: 1px;
-	height: 2.5vh;
-	background-color: #757575;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-left: 5%;
+.firstContent .line {
+  width: 1px;
+  height: 2.5vh;
+  background-color: #757575;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5%;
 }
 
 .emailContainer {
@@ -45,6 +45,7 @@
   font-size: 0.9em;
   font-weight: 100;
   color: #000;
+  text-decoration: none;
 }
 
 .shippingInformation {
@@ -98,4 +99,32 @@
   font-size: 0.9em;
   color: #000;
   font-weight: 100;
+}
+
+@media (max-width: 600px) {
+	.topbarContainer{
+		display: none;
+	}
+  .topbarContent {
+    width: 90%;
+    margin: 0 auto;
+    grid-template-columns: 1fr auto;
+  }
+
+  .shippingInformation {
+    display: none;
+	margin-left: 7%;
+  }
+
+  .secondContent .icon {
+    font-size: 1em;
+  }
+
+  .firstContent .line {
+	display: none;
+  }
+  .secondContent .line {
+    display: none;
+    margin-left: 0%;
+  }
 }

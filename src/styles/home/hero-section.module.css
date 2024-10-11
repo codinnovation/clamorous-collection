@@ -68,7 +68,6 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-
 }
 
 .heroPicture .description {
@@ -124,13 +123,54 @@
   font-weight: 800;
 }
 
-.photoContainer{
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
+.photoContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-.photoContainer img{
-	width: 100%;
-	height: auto;
+.photoContainer img {
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 600px) {
+  .heroContent {
+    width: 90%;
+    grid-template-columns: 1fr;
+    height: 100%;
+  }
+
+  .categoryContainer .header h1 {
+    font-size: 1em;
+  }
+
+  .category {
+    margin-top: 2%;
+  }
+  .category a {
+    font-size: 1em;
+    margin-bottom: 9%;
+  }
+
+  .heroPictureContent {
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin: 0 auto;
+  }
+
+  .heroPicture .description p {
+    font-size: 0.9em;
+    font-weight: 700;
+  }
+
+  .heroPicture .description .des1 h1 {
+    font-size: 1.5em;
+  }
+
+  .heroPicture .description .des2 h1 {
+    font-size: 0.85em;
+  }
 }
