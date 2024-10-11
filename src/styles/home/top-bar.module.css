@@ -1,0 +1,130 @@
+.topbarContainer {
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5vh;
+}
+
+.topbarContent {
+  width: 60%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.firstContent {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.firstContent .line {
+  width: 1px;
+  height: 2.5vh;
+  background-color: #757575;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5%;
+}
+
+.emailContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.emailContainer .icon {
+  margin-right: 4px;
+  color: #000;
+  font-size: 1.1em;
+}
+
+.emailContainer p {
+  font-size: 0.9em;
+  font-weight: 100;
+  color: #000;
+  text-decoration: none;
+}
+
+.shippingInformation {
+  margin-left: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.shippingInformation p {
+  font-size: 0.9em;
+  font-weight: 100;
+  color: #000;
+}
+
+.secondContent {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.secondContent .icon {
+  margin-left: 5%;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+.secondContent .line {
+  width: 1px;
+  height: 2.5vh;
+  background-color: #757575;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5%;
+}
+
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5%;
+  cursor: pointer;
+}
+
+.loginContainer .icon {
+  font-size: 1.1em;
+}
+
+.loginContainer p {
+  font-size: 0.9em;
+  color: #000;
+  font-weight: 100;
+}
+
+@media (max-width: 600px) {
+	.topbarContainer{
+		display: none;
+	}
+  .topbarContent {
+    width: 90%;
+    margin: 0 auto;
+    grid-template-columns: 1fr auto;
+  }
+
+  .shippingInformation {
+    display: none;
+	margin-left: 7%;
+  }
+
+  .secondContent .icon {
+    font-size: 1em;
+  }
+
+  .firstContent .line {
+	display: none;
+  }
+  .secondContent .line {
+    display: none;
+    margin-left: 0%;
+  }
+}
