@@ -8,7 +8,7 @@ import HeroImage from "../../../../public/hero-img.png";
 
 
 function HeroSection() {
-  const [showcategories, setShowcategories] = useState(true);
+  const [showcategories, setShowcategories] = useState(false);
 
   const openShowcategories = () => {
     setShowcategories(!showcategories);
