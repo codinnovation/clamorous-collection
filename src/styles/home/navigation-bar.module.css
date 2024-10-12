@@ -94,9 +94,9 @@
 }
 
 @media (max-width: 600px) {
-	.navigationContainer{
-		height: 14vh;
-	}
+  .navigationContainer {
+    height: 14vh;
+  }
   .navigationContent {
     width: 90%;
     margin-top: 1%;
@@ -122,10 +122,10 @@
   }
 
   .cart {
-	cursor: pointer;
-	position: relative;
-	transition: box-shadow 0.3s ease-in-out;
-	margin-left: 15%;
+    cursor: pointer;
+    position: relative;
+    transition: box-shadow 0.3s ease-in-out;
+    margin-left: 15%;
   }
 
   .icon {

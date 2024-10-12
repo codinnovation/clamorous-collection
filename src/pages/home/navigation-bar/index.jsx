@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../../../styles/home/navigation-bar.module.css";
 import Link from "next/link";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -6,6 +6,12 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import MenuIcon from "@mui/icons-material/Menu";
 
 function NavigationBar() {
+  const [openMenu, setOpenMenu] = useState(false);
+
+  const handleOpenMenu = () => {
+    setOpenMenu(!openMenu);
+  };
+
   return (
     <>
       <div className={styles.navigationContainer}>
@@ -23,7 +29,7 @@ function NavigationBar() {
             <Link href="/">Contact</Link>
           </div>
 
-          <div className={styles.menuBurger}>
+          <div className={styles.menuBurger} onClick={handleOpenMenu}>
             <MenuIcon className={styles.icon} />
           </div>
 
