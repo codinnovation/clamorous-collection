@@ -1,0 +1,145 @@
+.footerContainer {
+  background-color: #f3f6fa;
+  height: 20vh;
+  margin-top: 5%;
+}
+
+.footerContent {
+  width: 60%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  padding-top: 2%;
+}
+
+.companyName {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.companyName h1 {
+  font-family: sans-serif;
+  text-transform: uppercase;
+  color: #000;
+  font-size: 1.6em;
+}
+
+.companyName h1:nth-child(2) {
+  color: #7fad39;
+}
+
+.firstContentDescription {
+  margin-top: 5%;
+}
+
+.firstContentDescription p {
+  font-weight: 100;
+  margin-top: 3%;
+}
+
+.secondContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.secondContent h1 {
+  font-size: 1.1em;
+  font-family: sans-serif;
+}
+
+.secondContentDescription {
+  display: flex;
+  flex-direction: column;
+}
+
+.secondContentDescription a {
+  color: #000;
+  font-size: 1em;
+  margin-top: 3%;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.thirdContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.thirdContent h1 {
+  font-size: 1.1em;
+  font-family: sans-serif;
+  color: #000;
+}
+
+.thirdContent p {
+  font-size: 0.9em;
+  color: #000;
+  font-weight: 100;
+}
+
+.thirdContent .button {
+  margin-top: 4%;
+  width: 100%;
+}
+
+.thirdContent .button button {
+  width: 100%;
+  height: 60px;
+  border: none;
+  background-color: #7fad39;
+  font-weight: 600;
+  font-size: 1em;
+}
+
+@media (max-width: 600px) {
+  .footerContainer {
+    height: auto;
+    margin-top: 5%;
+  }
+
+  .footerContent {
+    width: 90%;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding-top: 2%;
+  }
+
+  .companyName h1 {
+    font-size: 1.2em;
+  }
+
+  .firstContentDescription p {
+    font-weight: 100;
+    margin-top: 1%;
+  }
+
+  .secondContent h1 {
+    font-size: 1em;
+  }
+  .secondContentDescription a {
+    color: #000;
+    font-size: 0.9em;
+    margin-top: 9%;
+  }
+
+  .thirdContent h1 {
+    font-size: 1em;
+  }
+
+  .thirdContent .button {
+    margin-top: 3%;
+    width: 100%;
+  }
+
+  .thirdContent .button button {
+    width: 100%;
+    height: 50px;
+    font-size: 0.9em;
+  }
+}

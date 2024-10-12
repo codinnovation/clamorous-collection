@@ -1,0 +1,112 @@
+.blogContainer {
+  background-color: #fff;
+}
+
+.blogHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 5%;
+}
+
+.blogHeader h1 {
+  font-weight: 900;
+  font-family: sans-serif;
+}
+
+.blogHeader hr {
+  background-color: #7fad39;
+  width: 100px;
+  height: 5px;
+  border-radius: 10px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.blogContent {
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 2%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.blog {
+  height: auto;
+  padding: 5px;
+}
+
+.blogImage {
+  background-color: #ffdbdf;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.blogImage img {
+  width: 90%;
+  height: auto;
+}
+
+.blogDescription {
+  margin-top: 5%;
+}
+
+.blogDate {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.blogDate .icon {
+  color: #ccc;
+}
+
+.blogDate h1 {
+  font-size: 1em;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  color: #ccc;
+  font-weight: 100;
+}
+
+.blog p {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  color: #000;
+  font-weight: 100;
+}
+
+@media (max-width: 600px) {
+  .blogHeader h1 {
+    font-size: 1.2em;
+  }
+
+  .blogHeader hr {
+	background-color: #7fad39;
+	margin-top: 8px;
+  }
+
+  .blogContent {
+	width: 90%;
+	margin-top: 2%;
+	grid-template-columns: 1fr;
+	gap: 20px;
+  }
+
+  
+.blogDate .icon {
+	font-size: 1em;
+  }
+  
+  .blogDate h1 {
+	font-size: 0.9em;
+  }
+
+  .blog p {
+font-size: 0.9em;
+  }
+}
