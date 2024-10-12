@@ -4,6 +4,9 @@ import NavigationBar from "./navigation-bar";
 import HeroSection from "./hero-section";
 import AfterHeroSection from "./after-hero-section";
 import FeatureCategory from "./featured-category";
+import Glance from "./glance";
+import Blog from "./blog";
+import Footer from "./footer";
 
 function HomePage() {
   return (
@@ -13,7 +16,10 @@ function HomePage() {
         <NavigationBar />
         <HeroSection />
         <AfterHeroSection />
-		<FeatureCategory/>
+        <FeatureCategory />
+        <Glance />
+        <Blog/>
+        <Footer/>
       </div>
     </>
   );
