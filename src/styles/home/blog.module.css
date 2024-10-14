@@ -86,27 +86,26 @@
   }
 
   .blogHeader hr {
-	background-color: #7fad39;
-	margin-top: 8px;
+    background-color: #7fad39;
+    margin-top: 8px;
   }
 
   .blogContent {
-	width: 90%;
-	margin-top: 2%;
-	grid-template-columns: 1fr;
-	gap: 20px;
+    width: 90%;
+    margin-top: 2%;
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 
-  
-.blogDate .icon {
-	font-size: 1em;
+  .blogDate .icon {
+    font-size: 1em;
   }
-  
+
   .blogDate h1 {
-	font-size: 0.9em;
+    font-size: 0.9em;
   }
 
   .blog p {
-font-size: 0.9em;
+    font-size: 0.9em;
   }
 }
