@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import HeroImage from "../../../../public/hero-img.png";
 import HeroImage1 from "../../../../public/bedsheet.png";
-import HeroImage2 from '../../../../public/hairclip.png'
+import HeroImage2 from "../../../../public/hairclip.png";
 
 function HeroSection() {
   const [showcategories, setShowcategories] = useState(false);
@@ -37,6 +37,7 @@ function HeroSection() {
 
             {showcategories && (
               <div className={styles.category}>
+                <Link href="/admin-page">Admin Page</Link>
                 <Link href="/category">Night wears</Link>
                 <Link href="/">Bedsheets</Link>
                 <Link href="/">Perfumes</Link>
@@ -61,7 +62,10 @@ function HeroSection() {
                     <h1>Comfort</h1>
                   </div>
                   <div className={styles.des2}>
-                    <h1>Shop our range of perfumes, nightwear, and home essentials for the perfect balance of elegance and relaxation.</h1>
+                    <h1>
+                      Shop our range of perfumes, nightwear, and home essentials
+                      for the perfect balance of elegance and relaxation.
+                    </h1>
                   </div>
                   <div className={styles.shopnow}>
                     <h1>Shop now</h1>
