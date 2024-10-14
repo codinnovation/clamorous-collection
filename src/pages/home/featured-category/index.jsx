@@ -1,6 +1,12 @@
 import React from "react";
 import styles from "../../../styles/home/feature-category.module.css";
 import HeroImage from "../../../../public/hero-img.png";
+import Nightwear from "../../../../public/nightwear.png";
+import Bedsheet from "../../../../public/bedsheet.png";
+import Perfume from "../../../../public/perfume.png";
+import Scrunchies from "../../../../public/scrunchies.png";
+import Totesbag from "../../../../public/totesbag.png";
+import Atomizers from "../../../../public/atomizers.png";
 import Image from "next/image";
 
 function FeatureCategory() {
@@ -14,67 +20,61 @@ function FeatureCategory() {
         <div className={styles.featureContent}>
           <div className={styles.productContainer}>
             <div className={styles.productImage}>
-              <Image src={HeroImage} width={900} height={900} alt="" />
+              <Image src={Nightwear} width={900} height={900} alt="" />
             </div>
 
             <div className={styles.productInformation}>
-              <p>Crab Pool Security</p>
-              <h1>Ghc 30.00</h1>
+              <p>Night wears</p>
             </div>
           </div>
 
-		  <div className={styles.productContainer}>
+          <div className={styles.productContainer}>
             <div className={styles.productImage}>
-              <Image src={HeroImage} width={900} height={900} alt="" />
+              <Image src={Bedsheet} width={900} height={900} alt="" />
             </div>
 
             <div className={styles.productInformation}>
-              <p>Crab Pool Security</p>
-              <h1>Ghc 30.00</h1>
+              <p>Bedsheets</p>
             </div>
           </div>
 
-		  <div className={styles.productContainer}>
+          <div className={styles.productContainer}>
             <div className={styles.productImage}>
-              <Image src={HeroImage} width={900} height={900} alt="" />
+              <Image src={Perfume} width={900} height={900} alt="" />
             </div>
 
             <div className={styles.productInformation}>
-              <p>Crab Pool Security</p>
-              <h1>Ghc 30.00</h1>
+              <p>Perfumes</p>
             </div>
           </div>
 
-		  <div className={styles.productContainer}>
+          <div className={styles.productContainer}>
             <div className={styles.productImage}>
-              <Image src={HeroImage} width={900} height={900} alt="" />
+              <Image src={Scrunchies} width={900} height={900} alt="" />
             </div>
 
             <div className={styles.productInformation}>
-              <p>Crab Pool Security</p>
-              <h1>Ghc 30.00</h1>
+              <p>Butterfly Scrunchies</p>
             </div>
           </div>
 
-		  <div className={styles.productContainer}>
+          <div className={styles.productContainer}>
             <div className={styles.productImage}>
-              <Image src={HeroImage} width={900} height={900} alt="" />
+              <Image src={Totesbag} width={900} height={900} alt="" />
             </div>
 
             <div className={styles.productInformation}>
-              <p>Crab Pool Security</p>
-              <h1>Ghc 30.00</h1>
+              <p>Totes Bags</p>
             </div>
           </div>
 
-		  <div className={styles.productContainer}>
+          <div className={styles.productContainer}>
             <div className={styles.productImage}>
-              <Image src={HeroImage} width={900} height={900} alt="" />
+              <Image src={Atomizers} width={900} height={900} alt="" />
             </div>
 
             <div className={styles.productInformation}>
-              <p>Crab Pool Security</p>
-              <h1>Ghc 30.00</h1>
+              <p>Atomizers</p>
             </div>
           </div>
         </div>
