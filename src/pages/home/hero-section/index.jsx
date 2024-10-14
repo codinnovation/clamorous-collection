@@ -9,15 +9,14 @@ import HeroImage1 from "../../../../public/bedsheet.png";
 import HeroImage2 from '../../../../public/hairclip.png'
 
 function HeroSection() {
-  const [showcategories, setShowcategories] = useState(true);
+  const [showcategories, setShowcategories] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const images = [HeroImage, HeroImage1, HeroImage2]; // Array of images
+  const images = [HeroImage, HeroImage1, HeroImage2];
 
   const openShowcategories = () => {
     setShowcategories(!showcategories);
   };
 
-  // To switch images every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
