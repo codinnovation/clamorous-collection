@@ -38,7 +38,16 @@ function HeroSection() {
             {showcategories && (
               <div className={styles.category}>
                 <Link href="/admin-page">Admin Page</Link>
-                <Link href="/category">Night wears</Link>
+
+                <Link
+                  href={{
+                    pathname: "/category",
+                    query: { category: "nightwears", title: "Night Wears" }
+                  }}
+                >
+                  Night wears
+                </Link>
+
                 <Link href="/">Bedsheets</Link>
                 <Link href="/">Perfumes</Link>
                 <Link href="/">Scrunchies</Link>

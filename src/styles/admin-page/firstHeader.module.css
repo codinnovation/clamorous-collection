@@ -69,6 +69,14 @@
   font-weight: 700;
 }
 
+.adminActions button:nth-child(3) {
+  width: 120px;
+  background-color: #ccc;
+  border: none;
+  color: #000;
+  font-weight: 700;
+}
+
 .categoryContent {
   width: 60%;
   margin: 0 auto;
@@ -220,21 +228,21 @@
   }
 
   .showCategories h1 {
-	font-size: 0.9em;
-	font-family: sans-serif;
-	margin-right: 10px;
-	width: 100%;
-	display: none;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    margin-right: 10px;
+    width: 100%;
+    display: none;
   }
-  
+
   .showCategories select {
-	width: 100%;
-	height: 45px;
-	padding-left: 10px;
-	border-radius: 10px;
-	border: none;
+    width: 100%;
+    height: 45px;
+    padding-left: 10px;
+    border-radius: 10px;
+    border: none;
   }
-  
+
   .categoryContent {
     width: 90%;
     margin-top: 5%;
