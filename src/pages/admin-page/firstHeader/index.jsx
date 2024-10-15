@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../../../styles/admin-page/firstHeader.module.css";
 import Image from "next/image";
-import CategoryImage from "../../../../public/img2.jpg";
 import MenuIcon from "@mui/icons-material/Menu";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import { db } from "../../../../firebase.config";
-import { ref, push } from "firebase/database";
+import { ref, push, get } from "firebase/database";
 import {
   getStorage,
   ref as storageRef,
@@ -30,6 +29,7 @@ const style = {
 function FirstHeader() {
   const [openActionModal, setOpenActionModal] = useState(false);
   const [openAddProduct, setOpenAddProduct] = useState(false);
+  const [productDataArray, setProductDataArray] = useState([]);
   const [productData, setProductData] = useState({
     productName: "",
     productPrice: "",
@@ -65,7 +65,10 @@ function FirstHeader() {
     const storage = getStorage();
     const imageFile = productData.productImage;
     const categoryFolder = productData.productCategory.toLowerCase();
-    const imageRef = storageRef(storage, `images/${categoryFolder}/${imageFile.name}`);
+    const imageRef = storageRef(
+      storage,
+      `images/${categoryFolder}/${imageFile.name}`
+    );
 
     // Upload image to Firebase Storage within the category folder
     const uploadTask = uploadBytesResumable(imageRef, imageFile);
@@ -76,7 +79,6 @@ function FirstHeader() {
         // Progress function, can be used to show progress indicator
       },
       (error) => {
-        toast.error("Error uploading image");
         console.error("Upload error:", error);
       },
       async () => {
@@ -118,6 +120,33 @@ function FirstHeader() {
     setOpenAddProduct(false);
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (!productData.productCategory) return; // Wait until category is selected
+
+        const dbRef = ref(db, `products/${productData.productCategory}`);
+        const response = await get(dbRef);
+        const data = response.val();
+
+        if (data && typeof data === "object") {
+          const dataArray = Object.entries(data).map(([key, value]) => ({
+            key,
+            ...value
+          }));
+          setProductDataArray(dataArray);
+        } else {
+          setProductDataArray([]);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setProductDataArray([]);
+      }
+    };
+
+    fetchData();
+  }, [productData.productCategory]); // Fetch data when the category changes
+
   return (
     <>
       <div className={styles.firstheaderContainer}>
@@ -146,6 +175,7 @@ function FirstHeader() {
           <div className={styles.adminActions}>
             <button onClick={() => setOpenAddProduct(true)}>Add Product</button>
             <button>Logout</button>
+            <button>Orders</button>
           </div>
 
           <div
@@ -155,38 +185,48 @@ function FirstHeader() {
             <MenuIcon />
           </div>
         </div>
+
+        {/* Display product data */}
         <div className={styles.categoryContent}>
-          <div className={styles.productContainer}>
-            <div className={styles.productImage}>
-              <Image src={CategoryImage} width={900} height={900} alt="" />
-            </div>
+          {productDataArray.length > 0 ? (
+            productDataArray.map((product) => (
+              <div key={product.key} className={styles.productContainer}>
+                <div className={styles.productImage}>
+                  <Image
+                    src={product.productImage}
+                    width={900}
+                    height={900}
+                    alt={product.productName}
+                    unoptimized // Optional: Use if Next.js image optimization causes issues
+                  />
+                </div>
 
-            <div className={styles.productInformation}>
-              <p>Crab Pool Security</p>
-              <div className={styles.priceContainer}>
-                <h1>Ghc</h1>
-                <h1>30.00</h1>
+                <div className={styles.productInformation}>
+                  <p>{product.productName}</p>
+                  <div className={styles.priceContainer}>
+                    <h1>Ghc</h1>
+                    <h1>{product.productPrice}</h1>
+                  </div>
+
+                  <div className={styles.productDescription}>
+                    <p>Description</p>
+                    <hr />
+                    <p>{product.productDescription}</p>
+                  </div>
+
+                  <div className={styles.actions}>
+                    <button>Delete</button>
+                    <button>Edit</button>
+                  </div>
+                </div>
               </div>
-
-              <div className={styles.productDescription}>
-                <p>Description</p>
-                <hr />
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa
-                  error vel autem minus fugiat suscipit dignissimos sequi quis
-                  voluptas. Animi veniam architecto perspiciatis reiciendis ipsa
-                  placeat doloribus eligendi saepe ea.
-                </p>
-              </div>
-            </div>
-
-            <div className={styles.actions}>
-              <button>Delete</button>
-              <button>Edit</button>
-            </div>
-          </div>
+            ))
+          ) : (
+            <p>No products found for this category</p>
+          )}
         </div>
       </div>
+
       <Modal open={openActionModal} onClose={handleCloseActionModal}>
         <Box sx={style}>
           <Button variant="outlined" onClick={() => setOpenAddProduct(true)}>
