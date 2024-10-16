@@ -1,12 +1,15 @@
 import React from "react";
-import FirstHeader from "./firstHeader";
+import SideBar from "./sidebar";
+import Main from "./main";
 
 function AdminHome() {
   return (
     <>
       <div>
-		<FirstHeader/>
-	  </div>
+        <SideBar>
+          <Main />
+        </SideBar>
+      </div>
     </>
   );
 }

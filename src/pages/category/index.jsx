@@ -3,10 +3,13 @@ import Layout from "../layout";
 import styles from "../../styles/category/category.module.css";
 import Image from "next/image";
 import CategoryImage from "../../../public/img2.jpg";
-import CategoryImage1 from "../../../public/img3.jpg";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { db } from "../../../firebase.config";
 import { ref, get } from "firebase/database";
 import { useRouter } from "next/router";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Category() {
   const router = useRouter();
@@ -38,6 +41,30 @@ function Category() {
     fetchData();
   }, [category]);
 
+
+const addCart = (product) => {
+  const existingCart = JSON.parse(localStorage.getItem("clamorousCart")) || [];
+
+  // Check if the product already exists in the cart
+  const isProductInCart = existingCart.some(item => item.key === product.key);
+
+  if (isProductInCart) {
+    // Show a message if the product is already in the cart
+    toast.warn(`${product.productName} is already in the cart`);
+    return; // Exit the function if the product is already in the cart
+  }
+
+  // Add the product to the cart if it doesn't exist
+  const updatedCart = [...existingCart, product];
+  localStorage.setItem("clamorousCart", JSON.stringify(updatedCart));
+  toast.success(`${product.productName} added to cart`);
+
+  // Optionally reload the page or update state here
+  window.location.reload(); // Reload the page after the item is added to the cart
+};
+
+  
+
   return (
     <>
       <Layout>
@@ -62,20 +89,19 @@ function Category() {
                   </div>
 
                   <div className={styles.productInformation}>
-                    <p>{product.productName || "Unnamed Product"}</p>
-                    <div className={styles.priceContainer}>
-                      <h1>Ghc</h1>
-                      <h1>{product.productPrice || "0.00"}</h1>
+                    <div className={styles.productName}>
+                      <h1>{product?.productName} </h1>
+                      <p>{`Ghc${product?.productPrice}`}</p>
                     </div>
 
-                    <div className={styles.productDescription}>
-                      <p>Description</p>
-                      <hr />
-                      <p>
-                        {product.productDescription ||
-                          "No description available"}
-                      </p>
+                    <div className={styles.addCart}>
+                      <AddShoppingCartIcon
+                        className={styles.icon}
+                        onClick={() => addCart(product)}
+                      />
+                      <FavoriteIcon className={styles.icon1} />
                     </div>
+                    <p>{product?.productDescription}</p>
                   </div>
                 </div>
               ))
@@ -85,6 +111,7 @@ function Category() {
           </div>
         </div>
       </Layout>
+      <ToastContainer />
     </>
   );
 }

@@ -48,7 +48,14 @@ function HeroSection() {
                   Night wears
                 </Link>
 
-                <Link href="/">Bedsheets</Link>
+                <Link
+                  href={{
+                    pathname: "/category",
+                    query: { category: "bedsheets", title: "Bed Sheets" }
+                  }}
+                >
+                  Bedsheets
+                </Link>
                 <Link href="/">Perfumes</Link>
                 <Link href="/">Scrunchies</Link>
                 <Link href="/">Hair Bands</Link>
