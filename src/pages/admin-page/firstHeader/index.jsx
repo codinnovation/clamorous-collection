@@ -30,6 +30,7 @@ function FirstHeader() {
   const [openActionModal, setOpenActionModal] = useState(false);
   const [openAddProduct, setOpenAddProduct] = useState(false);
   const [productDataArray, setProductDataArray] = useState([]);
+  const [ordersArray, setOrdersArray] = useState([]);
   const [productData, setProductData] = useState({
     productName: "",
     productPrice: "",
@@ -37,6 +38,8 @@ function FirstHeader() {
     productImage: "",
     productCategory: "" // New field for category
   });
+
+  console.log(ordersArray);
 
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
@@ -145,7 +148,32 @@ function FirstHeader() {
     };
 
     fetchData();
-  }, [productData.productCategory]); // Fetch data when the category changes
+  }, [productData.productCategory]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const dbRef = ref(db, `orders`);
+        const response = await get(dbRef);
+        const data = response.val();
+
+        if (data && typeof data === "object") {
+          const dataArray = Object.entries(data).map(([key, value]) => ({
+            key,
+            ...value
+          }));
+          setOrdersArray(dataArray);
+        } else {
+          setOrdersArray([]);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setOrdersArray([]);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>

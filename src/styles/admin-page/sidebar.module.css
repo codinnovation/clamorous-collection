@@ -1,0 +1,87 @@
+.sidebarContainer {
+  width: 20%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  z-index: 900;
+  background-color: #000;
+}
+
+.sidebarContent {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.storeNameContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.storeNameContainer h1 {
+  font-family: sans-serif;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.6em;
+}
+
+.storeNameContainer h1:nth-child(2) {
+  color: #7fad39;
+}
+
+.categoryHeader {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.categoryHeader h1 {
+  font-size: 0.9em;
+  color: #aeaeae;
+  font-family: sans-serif;
+  text-transform: uppercase;
+}
+
+.categoryLink {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.categoryLink a {
+  color: #fff;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  margin-top: 10%;
+  font-size: 1.2em;
+}
+
+.ordersHeader {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.ordersHeader h1 {
+  font-size: 0.9em;
+  color: #aeaeae;
+  font-family: sans-serif;
+  text-transform: uppercase;
+}
+
+.orderLink {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.orderLink a {
+  color: #fff;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  margin-top: 10%;
+  font-size: 1.2em;
+}

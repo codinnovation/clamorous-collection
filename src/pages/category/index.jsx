@@ -41,12 +41,29 @@ function Category() {
     fetchData();
   }, [category]);
 
-  const addCart = (product) => {
-    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
-    const updatedCart = [...existingCart, product];
-    localStorage.setItem("clamorousCart", JSON.stringify(updatedCart));
-    toast.success(`${product.productName} added to cart`);
-  };
+
+const addCart = (product) => {
+  const existingCart = JSON.parse(localStorage.getItem("clamorousCart")) || [];
+
+  // Check if the product already exists in the cart
+  const isProductInCart = existingCart.some(item => item.key === product.key);
+
+  if (isProductInCart) {
+    // Show a message if the product is already in the cart
+    toast.warn(`${product.productName} is already in the cart`);
+    return; // Exit the function if the product is already in the cart
+  }
+
+  // Add the product to the cart if it doesn't exist
+  const updatedCart = [...existingCart, product];
+  localStorage.setItem("clamorousCart", JSON.stringify(updatedCart));
+  toast.success(`${product.productName} added to cart`);
+
+  // Optionally reload the page or update state here
+  window.location.reload(); // Reload the page after the item is added to the cart
+};
+
+  
 
   return (
     <>

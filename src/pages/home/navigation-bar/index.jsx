@@ -18,6 +18,8 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import { db } from "../../../../firebase.config";
+import { get, ref, push } from "firebase/database";
 
 // Dynamically import the PaystackButton with no SSR
 const PaystackButton = dynamic(
@@ -45,6 +47,8 @@ function NavigationBar() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [last_name, setLast_Name] = useState("");
+  const [first_name, setFirst_Name] = useState("");
   const publicKey = process.env.NEXT_PUBLIC_PAY_STACK_API;
 
   useEffect(() => {
@@ -71,23 +75,63 @@ function NavigationBar() {
     setOpenPayModal(false);
   };
 
-  const amount = cartItems.reduce((total, item) => total + item.productPrice, 0) * 100; 
+  const amount =
+    cartItems.reduce((total, item) => total + item.productPrice, 0) * 100;
+
+  const handleSaveOrderToDB = (orderDetails) => {
+    const ordersRef = ref(db, "orders"); // Reference to the 'orders' section in Firebase
+    push(ordersRef, orderDetails)
+      .then(() => {
+        toast.success("Order placed successfully!");
+      })
+      .catch((error) => {
+        toast.error("Error saving order: " + error.message);
+      });
+  };
 
   const componentProps = {
     email,
     amount,
     currency: "GHS",
-    metadata: {
-      name,
-      phone
-    },
+    phone,
+    last_name,
+    first_name,
+    metadata: {},
     publicKey,
     text: "Pay Now",
-    onSuccess: () =>
-      toast.success("Thanks for doing business with us! Come back soon!!"),
-    onClose: () => toast.success("Wait! Don't leave :(")
-  };
+    onSuccess: (response) => {
+      // Payment successful, proceed to save the order
+      const orderDetails = {
+        customer: {
+          firstName: first_name,
+          lastName: last_name,
+          email: email,
+          phone: phone
+        },
+        products: cartItems, // Array of items from the cart
+        totalAmount: amount / 100, // Convert amount back to actual value
+        paymentInfo: {
+          transactionRef: response.reference,
+          status: response.status,
+          paymentMethod: "Paystack",
+          amountPaid: amount / 100,
+          currency: "GHS"
+        },
+        orderDate: new Date().toISOString() // Record the date of the order
+      };
 
+      // Save order details to Firebase
+      handleSaveOrderToDB(orderDetails);
+
+      // Clear the cart in local storage
+      localStorage.removeItem("clamorousCart");
+      setCartItems([]); // Update state to reflect the empty cart
+      // Show success message
+      
+      toast.success("Thanks for doing business with us! Come back soon!!");
+    },
+    onClose: () => toast.warning("Wait! Don't leave :(")
+  };
   return (
     <>
       <div className={styles.navigationContainer}>
@@ -140,9 +184,9 @@ function NavigationBar() {
                 }}
               >
                 <Image
-                  src={item.productImage} 
+                  src={item.productImage}
                   alt={item.productName}
-                  width={100} 
+                  width={100}
                   height={100}
                   style={{ borderRadius: "8px", marginRight: "10px" }}
                   unoptimized
@@ -185,10 +229,18 @@ function NavigationBar() {
         <Box sx={style}>
           <input
             type="text"
-            id="name"
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Name"
-            style={{ marginBottom: '10px', width: '100%' }}
+            id="first_name"
+            onChange={(e) => setFirst_Name(e.target.value)}
+            placeholder="First Name"
+            style={{ marginBottom: "10px", width: "100%" }}
+          />
+
+          <input
+            type="text"
+            id="last_name"
+            onChange={(e) => setLast_Name(e.target.value)}
+            placeholder="Last Name"
+            style={{ marginBottom: "10px", width: "100%" }}
           />
 
           <input
@@ -196,7 +248,7 @@ function NavigationBar() {
             id="email"
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
-            style={{ marginBottom: '10px', width: '100%' }}
+            style={{ marginBottom: "10px", width: "100%" }}
           />
 
           <label htmlFor="phone">Phone</label>
@@ -205,7 +257,7 @@ function NavigationBar() {
             id="phone"
             onChange={(e) => setPhone(e.target.value)}
             placeholder="Phone"
-            style={{ marginBottom: '10px', width: '100%' }}
+            style={{ marginBottom: "10px", width: "100%" }}
           />
           <PaystackButton {...componentProps} />
         </Box>
