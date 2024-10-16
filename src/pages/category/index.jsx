@@ -10,14 +10,18 @@ import { useRouter } from "next/router";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 function Category() {
   const router = useRouter();
   const { category, title } = router.query;
   const [productData, setProductData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       try {
         const dbRef = ref(db, `products/${category}`);
         const response = await get(dbRef);
@@ -29,44 +33,46 @@ function Category() {
             ...value
           }));
           setProductData(dataArray);
+          setIsLoading(false);
         } else {
           setProductData([]);
+          setIsLoading(false);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
         setProductData([]);
+        setIsLoading(false);
       }
     };
 
     fetchData();
   }, [category]);
 
+  const addCart = (product) => {
+    const existingCart =
+      JSON.parse(localStorage.getItem("clamorousCart")) || [];
 
-const addCart = (product) => {
-  const existingCart = JSON.parse(localStorage.getItem("clamorousCart")) || [];
+    const updatedCart = [...existingCart, product];
+    localStorage.setItem("clamorousCart", JSON.stringify(updatedCart));
+    toast.success(`${product.productName} added to cart`);
 
-  // Check if the product already exists in the cart
-  const isProductInCart = existingCart.some(item => item.key === product.key);
-
-  if (isProductInCart) {
-    // Show a message if the product is already in the cart
-    toast.warn(`${product.productName} is already in the cart`);
-    return; // Exit the function if the product is already in the cart
-  }
-
-  // Add the product to the cart if it doesn't exist
-  const updatedCart = [...existingCart, product];
-  localStorage.setItem("clamorousCart", JSON.stringify(updatedCart));
-  toast.success(`${product.productName} added to cart`);
-
-  // Optionally reload the page or update state here
-  window.location.reload(); // Reload the page after the item is added to the cart
-};
-
-  
+    window.location.reload();
+  };
 
   return (
     <>
+      {isLoading && (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            top: "50%"
+          }}
+        >
+          <CircularProgress />
+        </Box>
+      )}
       <Layout>
         <div className={styles.categoryContainer}>
           <div className={styles.categoryHeader}>

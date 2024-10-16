@@ -8,18 +8,18 @@ import Glance from "./glance";
 import Blog from "./blog";
 import Footer from "./footer";
 
-function HomePage() {
+function HomePage({ user }) {
   return (
     <>
       <div>
-        <TopBar />
-        <NavigationBar />
-        <HeroSection />
-        <AfterHeroSection />
-        <FeatureCategory />
-        <Glance />
-        <Blog/>
-        <Footer/>
+        <TopBar user={user} />
+        <NavigationBar user={user} />
+        <HeroSection user={user} />
+        <AfterHeroSection user={user} />
+        <FeatureCategory user={user} />
+        <Glance user={user} />
+        <Blog user={user} />
+        <Footer user={user} />
       </div>
     </>
   );

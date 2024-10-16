@@ -12,14 +12,14 @@ import {
   DialogContent,
   DialogActions,
   Button,
-  Typography
+  Typography,
 } from "@mui/material";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { db } from "../../../../firebase.config";
-import { get, ref, push } from "firebase/database";
+import { ref, push } from "firebase/database";
 
 // Dynamically import the PaystackButton with no SSR
 const PaystackButton = dynamic(
@@ -36,19 +36,19 @@ const style = {
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
-  p: 4
+  p: 4,
 };
 
-function NavigationBar() {
+function NavigationBar({ user }) {
   const [cartItems, setCartItems] = useState([]);
   const [favItems, setFavItems] = useState([]);
   const [openCartModal, setOpenCartModal] = useState(false);
   const [openPayModal, setOpenPayModal] = useState(false);
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [last_name, setLast_Name] = useState("");
   const [first_name, setFirst_Name] = useState("");
+  const [selectedAmount, setSelectedAmount] = useState(0);
   const publicKey = process.env.NEXT_PUBLIC_PAY_STACK_API;
 
   useEffect(() => {
@@ -67,7 +67,8 @@ function NavigationBar() {
     setOpenCartModal(false);
   };
 
-  const handleOpenPayModal = () => {
+  const handleOpenPayModal = (productPrice) => {
+    setSelectedAmount(productPrice);
     setOpenPayModal(true);
   };
 
@@ -75,11 +76,10 @@ function NavigationBar() {
     setOpenPayModal(false);
   };
 
-  const amount =
-    cartItems.reduce((total, item) => total + item.productPrice, 0) * 100;
+  const amount = selectedAmount * 100;
 
   const handleSaveOrderToDB = (orderDetails) => {
-    const ordersRef = ref(db, "orders"); // Reference to the 'orders' section in Firebase
+    const ordersRef = ref(db, "orders");
     push(ordersRef, orderDetails)
       .then(() => {
         toast.success("Order placed successfully!");
@@ -87,6 +87,13 @@ function NavigationBar() {
       .catch((error) => {
         toast.error("Error saving order: " + error.message);
       });
+  };
+
+  const handleDeleteItem = (itemToDelete) => {
+    const updatedCartItems = cartItems.filter((item) => item !== itemToDelete);
+    setCartItems(updatedCartItems);
+    localStorage.setItem("clamorousCart", JSON.stringify(updatedCartItems));
+    toast.success("Item deleted from cart.");
   };
 
   const componentProps = {
@@ -100,38 +107,35 @@ function NavigationBar() {
     publicKey,
     text: "Pay Now",
     onSuccess: (response) => {
-      // Payment successful, proceed to save the order
       const orderDetails = {
         customer: {
           firstName: first_name,
           lastName: last_name,
           email: email,
-          phone: phone
+          phone: phone,
         },
-        products: cartItems, // Array of items from the cart
-        totalAmount: amount / 100, // Convert amount back to actual value
+        products: cartItems.filter(
+          (item) => item.productPrice === selectedAmount
+        ),
+        totalAmount: amount / 100,
         paymentInfo: {
           transactionRef: response.reference,
           status: response.status,
           paymentMethod: "Paystack",
           amountPaid: amount / 100,
-          currency: "GHS"
+          currency: "GHS",
         },
-        orderDate: new Date().toISOString() // Record the date of the order
+        orderDate: new Date().toISOString(),
       };
-
-      // Save order details to Firebase
       handleSaveOrderToDB(orderDetails);
 
-      // Clear the cart in local storage
       localStorage.removeItem("clamorousCart");
-      setCartItems([]); // Update state to reflect the empty cart
-      // Show success message
-      
+      setCartItems([]);
       toast.success("Thanks for doing business with us! Come back soon!!");
     },
-    onClose: () => toast.warning("Wait! Don't leave :(")
+    onClose: () => toast.warning("Wait! Please don't leave"),
   };
+
   return (
     <>
       <div className={styles.navigationContainer}>
@@ -180,7 +184,7 @@ function NavigationBar() {
                 style={{
                   marginBottom: "15px",
                   display: "flex",
-                  alignItems: "center"
+                  alignItems: "center",
                 }}
               >
                 <Image
@@ -197,6 +201,21 @@ function NavigationBar() {
                   <Typography variant="body2">
                     {item.productDescription}
                   </Typography>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => handleOpenPayModal(item.productPrice)} // Pass product price to the function
+                  >
+                    Proceed to Checkout
+                  </Button>
+
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => handleDeleteItem(item)} // Call delete function
+                  >
+                    Delete
+                  </Button>
                 </div>
               </div>
             ))
@@ -207,13 +226,6 @@ function NavigationBar() {
         <DialogActions>
           <Button onClick={handleCloseCart} color="primary">
             Close
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleOpenPayModal}
-          >
-            Proceed to Checkout
           </Button>
         </DialogActions>
       </Dialog>
