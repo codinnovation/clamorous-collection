@@ -8,7 +8,7 @@ import HeroImage from "../../../../public/hero-img.png";
 import HeroImage1 from "../../../../public/bedsheet.png";
 import HeroImage2 from "../../../../public/hairclip.png";
 
-function HeroSection() {
+function HeroSection({ user }) {
   const [showcategories, setShowcategories] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const images = [HeroImage, HeroImage1, HeroImage2];
@@ -37,7 +37,9 @@ function HeroSection() {
 
             {showcategories && (
               <div className={styles.category}>
-                <Link href="/admin-page">Admin Page</Link>
+                {user?.email === "clam@gmail.com" && (
+                  <Link href="/admin-page">Admin Page</Link>
+                )}
 
                 <Link
                   href={{
@@ -56,13 +58,71 @@ function HeroSection() {
                 >
                   Bedsheets
                 </Link>
-                <Link href="/">Perfumes</Link>
-                <Link href="/">Scrunchies</Link>
-                <Link href="/">Hair Bands</Link>
-                <Link href="/">Hair clips</Link>
-                <Link href="/">Ladies accessories</Link>
-                <Link href="/">Totes bags</Link>
-                <Link href="/">Atomizers</Link>
+                <Link
+                  href={{
+                    pathname: "/category",
+                    query: { category: "perfumes", title: "Perfumes" }
+                  }}
+                >
+                  Perfumes
+                </Link>
+                <Link
+                  href={{
+                    pathname: "/category",
+                    query: { category: "scrunchies", title: "Scrunchies" }
+                  }}
+                >
+                  Scrunchies
+                </Link>
+                <Link
+                  href={{
+                    pathname: "/category",
+                    query: { category: "hairbands", title: "Hair Bands" }
+                  }}
+                >
+                  Hair Bands
+                </Link>
+                <Link
+                  href={{
+                    pathname: "/category",
+                    query: { category: "hairclips", title: "Hair Clips" }
+                  }}
+                >
+                  Hair clips
+                </Link>
+                <Link
+                  href={{
+                    pathname: "/category",
+                    query: {
+                      category: "ladiesaccessories",
+                      title: "Ladies Accessories"
+                    }
+                  }}
+                >
+                  Ladies accessories
+                </Link>
+                <Link
+                  href={{
+                    pathname: "/category",
+                    query: {
+                      category: "totesbags",
+                      title: "Totes Bags"
+                    }
+                  }}
+                >
+                  Totes bags
+                </Link>
+                <Link
+                  href={{
+                    pathname: "/category",
+                    query: {
+                      category: "atomizers",
+                      title: "Atomizers"
+                    }
+                  }}
+                >
+                  Atomizers
+                </Link>
               </div>
             )}
           </div>
