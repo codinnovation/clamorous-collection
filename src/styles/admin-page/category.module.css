@@ -1,0 +1,118 @@
+.categoryContainer {
+  width: 80%;
+  margin-left: 15%;
+}
+
+.categoryContent {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 3%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.productContainer {
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.productImage {
+  background-color: #ceefea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.productContainer:nth-child(even) .productImage {
+  background-color: #f8ebcb;
+}
+
+.productImage img {
+  width: 75%;
+  height: auto;
+}
+
+.productInformation {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.productInformation p {
+  font-size: 1em;
+  color: #000;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.productInformation h1 {
+  font-size: 1.3em;
+  font-family: sans-serif;
+  margin-top: 5px;
+}
+
+.priceContainer {
+  display: flex;
+  align-items: flex-start;
+}
+
+.priceContainer h1:nth-child(1) {
+  font-size: 0.9em;
+  color: red;
+  margin-right: 2px;
+}
+
+.priceContainer h1:nth-child(2) {
+  font-size: 1.2em;
+}
+
+.productDescription {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 15px;
+}
+
+.productDescription hr {
+  background-color: #7fad39;
+  width: 100px;
+  height: 5px;
+  border-radius: 10px;
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.productDescription p:nth-child(1) {
+  font-size: 1.2em;
+  margin-right: 5px;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.productDescription p:nth-child(2) {
+  margin-top: 5px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  color: #000;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.actions button {
+  width: 100px;
+  height: 45px;
+  margin: 10px;
+  background-color: none;
+  border: none;
+}
